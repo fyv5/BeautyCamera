@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/image_edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:id="@+id/image_edit_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_dark">
+        </RelativeLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/image_edit_topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@android:color/black">
+        <TextView
+            android:id="@+id/text_begin"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="开始美颜"
+            android:textColor="@android:color/white"/>
+            <!--android:src="@drawable/selector_image_back"-->
+
+        <TextView
+            android:id="@+id/text_exit_save"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存图片"
+            android:textColor="@android:color/white"/>
+            <!--android:src="@drawable/selector_image_save"/>-->
+    </RelativeLayout>
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/glsurfaceview_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/image_edit_topbar"
+        android:layout_above="@id/image_edit_layout"/>
+
+</RelativeLayout>
