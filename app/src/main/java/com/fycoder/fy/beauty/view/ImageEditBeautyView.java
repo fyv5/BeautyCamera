@@ -82,17 +82,17 @@ public class ImageEditBeautyView extends ImageEditFragment {
         }).start();
     }
 
-//    @Override
-//    public void onHiddenChanged(boolean hidden) {
-//        super.onHiddenChanged(hidden);
-//        if(!hidden){
-//            mSmoothBubbleSeekBar.setProgress(0);
-//            mWhiteBubbleSeekBar.setProgress(0);
-//            init();
-//        }else{
-//            mMagicSDK.uninitMagicBeauty();
-//        }
-//    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            mSmoothBubbleSeekBar.setProgress(0);
+            mWhiteBubbleSeekBar.setProgress(0);
+            init();
+        }else{
+            mMagicSDK.uninitMagicBeauty();
+        }
+    }
 
     private BubbleSeekBar.OnBubbleSeekBarChangeListener mOnSmoothBubbleSeekBarChangeListener =
             new BubbleSeekBar.OnBubbleSeekBarChangeListener() {
@@ -117,7 +117,7 @@ public class ImageEditBeautyView extends ImageEditFragment {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-
+            
         }
 
         @Override
