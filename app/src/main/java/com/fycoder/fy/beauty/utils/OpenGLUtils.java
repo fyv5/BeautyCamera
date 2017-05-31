@@ -25,7 +25,14 @@ public class OpenGLUtils {
 	public static int loadTexture(final Bitmap img, final int usedTexId) {
 		return loadTexture(img, usedTexId, false);
     }
-	
+
+	/**
+	 *
+	 * @param img
+	 * @param usedTexId
+	 * @param recyled
+	 * @return
+	 */
 	public static int loadTexture(final Bitmap img, final int usedTexId, boolean recyled) {
 		if(img == null)
 			return NO_TEXTURE; 
@@ -148,8 +155,20 @@ public class OpenGLUtils {
 	          e.printStackTrace();  
 	      }  	  
 	      return image;  	  
-	}  
-    
+	}
+
+	/**
+	 * 在OpenGL ES中，每个program对象有且仅有一个Vertex Shader对象和一个Fragment Shader对象连接到它。Shader类似于C编译器。
+	   Program类似于C链接器。glLinkProgram操作产生最后的可执行程序，它包含最后可以在硬件上执行的硬件指令。
+	 1）创建program ： GLuint   glCreateProgram(void)
+	 2）绑定shader到program ： void   glAttachShader(GLuint program, GLuint shader)。
+	    每个program必须绑定一个Vertex Shader 和一个Fragment Shader。
+	 3）链接program ： void   glLinkProgram(GLuint program)
+	 4）使用porgram ： void   glUseProgram(GLuint program)
+	 * @param strVSource
+	 * @param strFSource
+	 * @return
+	 */
 	public static int loadProgram(final String strVSource, final String strFSource) {
         int iVShader;
         int iFShader;
@@ -182,7 +201,17 @@ public class OpenGLUtils {
         GLES20.glDeleteShader(iFShader);
         return iProgId;
     }
-	
+
+	/**
+	 * 1.创建shader
+	 	1）编写Vertex Shader和Fragment Shader源码。
+	 	2）创建两个shader 实例：GLuint   glCreateShader(GLenum type);
+	 	3）给Shader实例指定源码。 glShaderSource
+	 	4）在线编译shaer源码 void   glCompileShader(GLuint shader)
+	 * @param strSource
+	 * @param iType
+	 * @return
+	 */
 	private static int loadShader(final String strSource, final int iType) {
         int[] compiled = new int[1];
         int iShader = GLES20.glCreateShader(iType);

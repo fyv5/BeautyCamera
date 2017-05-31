@@ -30,24 +30,41 @@ import java.nio.FloatBuffer;
 import java.util.LinkedList;
 
 public class GPUImageFilter {
+    //顶点着色器 设置顶点的位置，并且把位置和纹理坐标这样的参数发送到片段着色器。
     public static final String NO_FILTER_VERTEX_SHADER = "" +
             "attribute vec4 position;\n" +
+            //position变量是我们在程序中传给Shader的顶点数据的位置，是一个矩阵，规定了图像4个点的位置，
+            // 并且可以在shader中经过矩阵进行平移、旋转等再次变换。在GPUImage中，我们根据GLSurfaceView的大小、
+            // PreviewSize的大小实现计算出矩阵，通过glGetAttribLocation获取id，再通过glVertexAttribPointer将矩阵传入。
+            // 新的顶点位置通过在顶点着色器中写入gl_Position传递到渲染管线的后继阶段继续处理。
+            // 结合后面绘制过程中的glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);，首先选取第三个点，与前两个点绘制成一个三角形，
+            // 再选取最后一个点，与第二、第三个点绘制成三角形，最终绘制成多边形区域。
             "attribute vec4 inputTextureCoordinate;\n" +
+            //inputTextureCoordinate是纹理坐标，纹理坐标定义了图像的哪一部分将被映射到多边形
             " \n" +
             "varying vec2 textureCoordinate;\n" +
+            //因为顶点着色器负责和片段着色器交流，所以我们需要创建一个变量和它共享相关的信息。
+            // 在图像处理中，片段着色器需要的唯一相关信息就是顶点着色器现在正在处理哪个像素
             " \n" +
             "void main()\n" +
             "{\n" +
             "    gl_Position = position;\n" +
+            //gl_Position是用来传输投影坐标系内顶点坐标的内建变量，GPUImage在Java层已经变换过，在这里不需要经过任何变换
             "    textureCoordinate = inputTextureCoordinate.xy;\n" +
+            //取出这个顶点中纹理坐标的 X 和 Y 的位置（仅需要这两个属性），然后赋值给一个将要和片段着色器通信的变量
             "}";
+    //片段着色器 唯一目的就是确定一个像素的颜色
     public static final String NO_FILTER_FRAGMENT_SHADER = "" +
             "varying highp vec2 textureCoordinate;\n" +
+            //对应顶点着色器中变量名相同的变量，片段着色器作用在每一个像素上，我们需要一个方法来确定我们当前在分析
+            //哪一个像素/片段。它需要存储像素的 X 和 Y 坐标。我们接收到的是当前在顶点着色器被设置好的纹理坐标。
             " \n" +
             "uniform sampler2D inputImageTexture;\n" +
+            //uniforms变量(一致变量)用来将数据值从应用程其序传递到顶点着色器或者片元着色器
             " \n" +
             "void main()\n" +
             "{\n" +
+            //创建一个 2D 的纹理。它采用我们之前声明过的属性作为参数来决定被处理的像素的颜色
             "     gl_FragColor = texture2D(inputImageTexture, textureCoordinate);\n" +
             "}";
 

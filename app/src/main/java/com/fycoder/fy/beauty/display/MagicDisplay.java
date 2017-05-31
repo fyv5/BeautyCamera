@@ -106,7 +106,7 @@ public abstract class MagicDisplay implements Renderer {
 		mFilters.onOutputSizeChanged(mImageWidth, mImageHeight);
 	}
 	
-	protected void onResume(){
+	protected void onResume() {
 		
 	}
 	

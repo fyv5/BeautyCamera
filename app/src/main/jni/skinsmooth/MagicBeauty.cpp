@@ -144,6 +144,7 @@ void MagicBeauty::_startSkinSmooth(float smoothlevel){
 						- mIntegralMatrixSqr[i1]) / squar - m*m;
 				float k = v / (v + smoothlevel);
 
+                //只改变offset*3位置处的Y值
 				mImageData_yuv[offset * 3] = ceil(m - k * m + k * mImageData_yuv[offset * 3]);
 			}
 		}
@@ -164,7 +165,7 @@ void MagicBeauty::initSkinMatrix(){
 			if ((RGB.blue>95 && RGB.green>40 && RGB.red>20 &&
 					RGB.blue-RGB.red>15 && RGB.blue-RGB.green>15)||
 					(RGB.blue>200 && RGB.green>210 && RGB.red>170 &&
-					abs(RGB.blue-RGB.red)<=15 && RGB.blue>RGB.red&& RGB.green>RGB.red))
+					abs(RGB.blue-RGB.red)<=15 && RGB.blue>RGB.red && RGB.green>RGB.red))
 				mSkinMatrix[offset] = 255;
 			else
 				mSkinMatrix[offset] = 0;

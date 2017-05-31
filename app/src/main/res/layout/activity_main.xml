@@ -2,19 +2,15 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.fycoder.fy.beauty.activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <com.fycoder.fy.beauty.widget.BubbleSeekBar
-        android:id="@+id/seekbar"
-        android:layout_width="368dp"
-        android:layout_height="100dp"
-        style="@style/SeekBar.Light"
-        android:background="@color/colorAccent"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    </com.fycoder.fy.beauty.widget.BubbleSeekBar>
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

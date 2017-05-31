@@ -117,7 +117,7 @@ public class ImageEditBeautyView extends ImageEditFragment {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-            
+
         }
 
         @Override
