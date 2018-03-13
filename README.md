@@ -4,4 +4,3 @@ Adnroid端采用Camera2 API实现自定义相机，实现了拍照、聚焦、�
 
 
 
-项目美颜算法系列参考 http://blog.csdn.net/oShunz/article/details/50537631
